@@ -50,7 +50,8 @@ public class ProductController
     public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile)
     {
         try
-        {System.out.println(product);
+        {
+            System.out.println(product);
             Product product1=service.addProduct(product,imageFile);
             return new ResponseEntity<>(product1,HttpStatus.OK);
         }
@@ -59,6 +60,21 @@ public class ProductController
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+    @PostMapping("/product/c")
+    public ResponseEntity<?> createProduct(
+            @RequestBody Product product
+    ) {
+        try
+        {
+            System.out.println(product);
+            Product product1=service.createProduct(product);
+            return new ResponseEntity<>(product1,HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("product/{productId}/image")
